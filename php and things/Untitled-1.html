@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input[type="file"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            display: none;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sell Your Item</h1>
+        <form id="sellForm">
+            <input type="file" id="photo" accept="image/*">
+            <img id="photoPreview" src="" alt="Photo Preview">
+            <input type="number" id="price" placeholder="Set your price" required>
+            <button type="submit">Sell</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('photo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoPreview = document.getElementById('photoPreview');
+                photoPreview.src = e.target.result;
+                photoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('sellForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const photo = document.getElementById('photo').files[0];
+            const price = document.getElementById('price').value;
+            if (photo && price) {
+                const formData = new FormData();
+                formData.append('photo', photo);
+                formData.append('price', price);
+
+                fetch('send_email.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert('Your item has been listed for sale!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert('Please provide both a photo and a price.');
+            }
+        });
+    </script>
+</body>
+</html>
