@@ -1,6 +1,5 @@
 document.getElementById('takePictureBtn').addEventListener('click', function() {
-    // Replace with actual implementation to take picture (if using a camera API)
-    alert('Taking picture...');
+    alert('Take Picture functionality goes here');
 });
 
 document.getElementById('sellBtn').addEventListener('click', function() {
@@ -14,7 +13,7 @@ document.getElementById('sellBtn').addEventListener('click', function() {
     let subject = 'New Item for Sale';
     let body = `Price: ${price}`;
 
-    // Simulate sending email (replace with actual backend code for sending emails)
+    // Simulate sending email
     alert(`Sending email to ${recipient} with price: ${price}`);
 
     // Clear input after selling
