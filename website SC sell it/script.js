@@ -1,5 +1,4 @@
 document.getElementById('takePictureBtn').addEventListener('click', function() {
-    // Implement functionality to take a picture (not directly possible in web apps)
     alert('Feature not implemented in web version');
 });
 
@@ -10,11 +9,27 @@ document.getElementById('sellBtn').addEventListener('click', function() {
         return;
     }
 
-    // Implement functionality to send email
     sendEmail(price);
 });
 
 function sendEmail(price) {
-    // Replace with actual email sending code (e.g., fetch or XMLHttpRequest to backend)
-    alert(`Email sent with price: ${price}`);
+    let recipient = 'recipient@example.com'; // Replace with recipient email address
+    let subject = 'New Item for Sale';
+    let body = `Price: ${price}`;
+    let attachmentPath = 'path/to/attachment.jpg'; // Replace with actual path or use file input to select
+
+    // AJAX request to send email
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/sendEmail');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            alert('Email sent successfully');
+        } else {
+            alert('Failed to send email');
+        }
+    };
+
+    xhr.send(JSON.stringify({ recipient, subject, body, attachmentPath }));
 }
