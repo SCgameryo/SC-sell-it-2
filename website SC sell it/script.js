@@ -1,5 +1,6 @@
 document.getElementById('takePictureBtn').addEventListener('click', function() {
-    alert('Feature not implemented in web version');
+    // Replace with actual implementation to take picture (if using a camera API)
+    alert('Taking picture...');
 });
 
 document.getElementById('sellBtn').addEventListener('click', function() {
@@ -9,27 +10,13 @@ document.getElementById('sellBtn').addEventListener('click', function() {
         return;
     }
 
-    sendEmail(price);
-});
-
-function sendEmail(price) {
-    let recipient = 'recipient@example.com'; // Replace with recipient email address
+    let recipient = 'recipient@example.com'; // Replace with actual recipient email
     let subject = 'New Item for Sale';
     let body = `Price: ${price}`;
-    let attachmentPath = 'path/to/attachment.jpg'; // Replace with actual path or use file input to select
 
-    // AJAX request to send email
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/sendEmail');
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    // Simulate sending email (replace with actual backend code for sending emails)
+    alert(`Sending email to ${recipient} with price: ${price}`);
 
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            alert('Email sent successfully');
-        } else {
-            alert('Failed to send email');
-        }
-    };
-
-    xhr.send(JSON.stringify({ recipient, subject, body, attachmentPath }));
-}
+    // Clear input after selling
+    document.getElementById('priceInput').value = '';
+});
